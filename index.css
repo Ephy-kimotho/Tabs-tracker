@@ -1,43 +1,101 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+    --clr-cream: #FEF9D9;
+    --clr-blue: #8EACCD;
+    --clr-red: #d90429;
+    --clr-light-red: #fa143a;
+    --clr-green: #52b788;
+    --clr-light-green: #23bd45;
+
+    --fs-md: 0.85rem;
+    --fs-lg: 1rem;
+}
+
+* {
     margin: 0;
-    padding: 10px;
-    font-family: Arial, Helvetica, sans-serif;
-    min-width: 400px;
-}
-
-input {
-    width: 100%;
-    padding: 10px;
+    padding: 0;
     box-sizing: border-box;
-    border: 1px solid #5f9341;
-    margin-bottom: 4px;
+    font-family: Inter, sans-serif;
 }
 
-button {
-    background: #5f9341;
+body{
+    width: 100%;
+    background-color: var(--clr-cream);
+}
+
+.container {
+    width: 600px;
+    padding: 20px 15px 10px;
+    min-height: 100%;
+}
+
+.input-wrapper {
+    display: grid;
+    gap: 1rem;
+    width: 100%;
+}
+
+.input-wrapper input {
+    max-width: 100%;
+    padding: 12px 0px 12px 16px;
+    font-size: var(--fs-md);
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    letter-spacing: 1.2;
+}
+
+.btn {
+    border: none;
+    padding: 8px 12px;
+    font-size: var(--fs-lg);
+    border-radius: 5px;
     color: white;
-    padding: 10px 20px;
-    border: 1px solid #5f9341;
     font-weight: bold;
+    cursor: pointer;
+    text-transform: capitalize;
 }
 
-#delete-btn {
-    background: white;
-    color: #5f9341;
+.btn-save {
+    background-color: var(--clr-green);
 }
 
-ul {
-    margin-top: 20px;
+.btn-delete {
+    background-color: var(--clr-red);
+}
+
+.btn-save:hover {
+    background-color: var(--clr-light-green);
+}
+
+.btn-delete:hover {
+    background-color: var(--clr-light-red);
+}
+
+.btn:active {
+    box-shadow: inset 4px 4px 5px rgba(31, 31, 31, 0.5);
+}
+
+.links-container {
     list-style: none;
-    padding-left: 0;
+    margin-top: 1rem;
+    font-size: var(--fs-lg);
 }
 
-li {
-    margin-top: 5px;
+.links-container li {
+    margin-bottom: 10px;
 }
 
-a {
-    color: #5f9341;
+.link {
+    text-decoration: none;
+    color: var(--clr-blue);
+    font-weight: 800;
+    text-wrap: pretty;
 }
 
-
+.link:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 2px;
+}

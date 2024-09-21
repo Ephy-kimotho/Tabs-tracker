@@ -1,47 +1,84 @@
-let myLeads = []
-const inputEl = document.getElementById("input-el")
-const inputBtn = document.getElementById("input-btn")
-const ulEl = document.getElementById("ul-el")
-const deleteBtn = document.getElementById("delete-btn")
-const leadsFromLocalStorage = JSON.parse( localStorage.getItem("myLeads") )
-const tabBtn = document.getElementById("tab-btn")
+const inputEl = document.getElementById("input-el");
+const btnContainer = document.querySelector(".btn-container");
+const linksContainer = document.querySelector(".links-container");
 
-if (leadsFromLocalStorage) {
-    myLeads = leadsFromLocalStorage
-    render(myLeads)
+let myLeads = JSON.parse(localStorage.getItem("leads")) || [];
+
+btnContainer.addEventListener("click", (e) => {
+  const target = e.target;
+  const { id } = target;
+
+  switch (id) {
+    case "input-btn":
+      addLink();
+      break;
+    case "save-btn":
+      saveTab();
+      break;
+    case "delete-input":
+      deleteLink();
+      break;
+    case "clear-btn":
+      clearAll();
+      break;
+  }
+});
+
+function addLink() {
+  const link = inputEl.value;
+  clearInput();
+  myLeads.push(link);
+  saveLeads();
+  render(myLeads);
 }
 
-tabBtn.addEventListener("click", function(){    
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
-        myLeads.push(tabs[0].url)
-        localStorage.setItem("myLeads", JSON.stringify(myLeads) )
-        render(myLeads)
-    })
-})
+function deleteLink() {
+  const link = inputEl.value;
+  const index = myLeads.findIndex((lead) => lead === link);
+  if (index !== -1) {
+    myLeads.splice(index, 1);
+    saveLeads();
+    render(myLeads);
+  }
+}
+
+function clearAll() {
+  myLeads = [];
+  localStorage.removeItem("leads");
+  render(myLeads);
+}
+
+function saveTab() {
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    myLeads.push(tabs[0].url);
+    saveLeads();
+    render(myLeads);
+  });
+}
 
 function render(leads) {
-    let listItems = ""
-    for (let i = 0; i < leads.length; i++) {
-        listItems += `
-            <li>
-                <a target='_blank' href='${leads[i]}'>
-                    ${leads[i]}
-                </a>
-            </li>
-        `
-    }
-    ulEl.innerHTML = listItems
+  linksContainer.innerHTML = "";
+  leads.forEach((lead) => {
+    const li = document.createElement("li");
+    const newLink = document.createElement("a");
+
+    newLink.classList.add("link");
+    newLink.setAttribute("href", lead);
+    newLink.setAttribute("target", "_blank");
+    newLink.textContent = lead;
+
+    li.appendChild(newLink);
+    linksContainer.appendChild(li);
+  });
 }
 
-deleteBtn.addEventListener("dblclick", function() {
-    localStorage.clear()
-    myLeads = []
-    render(myLeads)
-})
+function saveLeads() {
+  localStorage.setItem("leads", JSON.stringify(myLeads));
+}
 
-inputBtn.addEventListener("click", function() {
-    myLeads.push(inputEl.value)
-    inputEl.value = ""
-    localStorage.setItem("myLeads", JSON.stringify(myLeads) )
-    render(myLeads)
-})
+function clearInput() {
+  inputEl.value = "";
+}
+
+
+render(myLeads)

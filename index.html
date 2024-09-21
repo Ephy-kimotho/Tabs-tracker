@@ -1,14 +1,26 @@
 <html>
-    <head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
-        <link rel="stylesheet" href="index.css">
-    </head>
-    <body>
-        <input type="text" id="input-el">
-        <button id="input-btn">SAVE INPUT</button>
-        <button id="tab-btn">SAVE TAB</button>
-        <button id="delete-btn">DELETE ALL</button>
-        <ul id="ul-el">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <section class="container">
+        <div class="input-wrapper">
+            <input type="text" id="input-el" placeholder="Enter link to save or delete...">
+            <div class="btn-container">
+                <button id="input-btn" class="btn btn-save" type="submit">Save input</button>
+                <button id="save-btn" class="btn btn-save" type="submit">Save tab</button>
+                <button id="delete-input" class="btn btn-delete" type="submit">Delete input</button>
+                <button id="clear-btn" class="btn btn-delete" type="submit">Clear all</button>
+            </div>
+        </div>
+
+        <ul class="links-container">
         </ul>
-        <script src="index.js"></script>
-    </body>
+    </section>
+    <script src="index.js"></script>
+</body>
+
 </html>

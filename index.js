@@ -24,6 +24,13 @@ btnContainer.addEventListener("click", (e) => {
   }
 });
 
+inputEl.addEventListener("keydown", (e) => {
+  const { value } = e.currentTarget;
+  if (e.key === "Enter" && value) {
+    addLink();
+  }
+});
+
 function addLink() {
   const link = inputEl.value;
   clearInput();
@@ -37,6 +44,7 @@ function deleteLink() {
   const index = myLeads.findIndex((lead) => lead === link);
   if (index !== -1) {
     myLeads.splice(index, 1);
+    clearInput();
     saveLeads();
     render(myLeads);
   }
@@ -80,5 +88,4 @@ function clearInput() {
   inputEl.value = "";
 }
 
-
-render(myLeads)
+render(myLeads);

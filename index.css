@@ -19,13 +19,13 @@
     font-family: Inter, sans-serif;
 }
 
-body{
+body {
     width: 100%;
     background-color: var(--clr-cream);
 }
 
 .container {
-    width: 600px;
+    width: 700px;
     padding: 20px 15px 10px;
     min-height: 100%;
 }
@@ -98,4 +98,11 @@ body{
     text-decoration: underline;
     text-underline-offset: 4px;
     text-decoration-thickness: 2px;
+}
+
+.message {
+    font-size: 1rem;
+    color: var(--clr-red);
+    font-weight: bold;
+    margin-block: 0.5rem;
 }

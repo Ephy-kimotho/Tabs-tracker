@@ -1,4 +1,5 @@
 const inputEl = document.getElementById("input-el");
+const container = document.querySelector(".container");
 const btnContainer = document.querySelector(".btn-container");
 const linksContainer = document.querySelector(".links-container");
 
@@ -32,7 +33,7 @@ inputEl.addEventListener("keydown", (e) => {
 });
 
 function addLink() {
-  const link = inputEl.value;
+  const link = inputEl.value.trim();
   clearInput();
   myLeads.push(link);
   saveLeads();
@@ -78,6 +79,8 @@ function render(leads) {
     li.appendChild(newLink);
     linksContainer.appendChild(li);
   });
+
+  checkForEmptyLeads();
 }
 
 function saveLeads() {
@@ -86,6 +89,18 @@ function saveLeads() {
 
 function clearInput() {
   inputEl.value = "";
+}
+
+const p = document.createElement("p");
+p.textContent = "No links saved.";
+p.classList.add("message");
+
+function checkForEmptyLeads() {
+  if (myLeads.length === 0 && !container.contains(p)) {
+    container.insertBefore(p, linksContainer);
+  } else if (container.contains(p)) {
+    container.removeChild(p);
+  }
 }
 
 render(myLeads);

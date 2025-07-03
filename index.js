@@ -35,7 +35,7 @@ inputEl.addEventListener("keydown", (e) => {
 function addLink() {
   const link = inputEl.value.trim();
   clearInput();
-  myLeads.push(link);
+  myLeads.unshift(link);
   saveLeads();
   render(myLeads);
 }
@@ -59,7 +59,7 @@ function clearAll() {
 
 function saveTab() {
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    myLeads.push(tabs[0].url);
+    myLeads.unshift(tabs[0].url);
     saveLeads();
     render(myLeads);
   });
